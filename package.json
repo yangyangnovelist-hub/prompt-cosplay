@@ -1,0 +1,64 @@
+{
+  "name": "prompt-cosplay",
+  "version": "0.1.0",
+  "description": "Find AI agent roles that are mostly costume, measure their execution evidence, and cut prompt bloat.",
+  "type": "module",
+  "bin": {
+    "cosplay": "dist/cli.js",
+    "prompt-cosplay": "dist/cli.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/cli.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "ci": "npm run typecheck && npm test && npm run build",
+    "prepublishOnly": "npm run ci"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yangyangnovelist-hub/prompt-cosplay.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yangyangnovelist-hub/prompt-cosplay/issues"
+  },
+  "homepage": "https://yangyangnovelist-hub.github.io/prompt-cosplay/",
+  "keywords": [
+    "ai-agents",
+    "agent-skills",
+    "prompt-engineering",
+    "benchmark",
+    "lint",
+    "codex",
+    "claude-code",
+    "cursor"
+  ],
+  "author": "yangyangnovelist-hub",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "commander": "^14.0.0",
+    "skilldoctor": "https://github.com/xyiqq/skilldoctor/archive/629d5cda9021c07a07aeae67ae8e00ef4222a0d4.tar.gz"
+  },
+  "devDependencies": {
+    "@types/node": "^24.2.1",
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2",
+    "vitest": "^4.1.11"
+  }
+}

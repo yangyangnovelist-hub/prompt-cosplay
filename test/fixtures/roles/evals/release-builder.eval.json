@@ -1,0 +1,5 @@
+{
+  "role": "release-builder",
+  "task": "Prepare a release candidate",
+  "assertions": ["tests pass", "artifact installs", "checksum matches"]
+}

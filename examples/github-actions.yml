@@ -1,0 +1,14 @@
+name: PromptCosplay
+
+on:
+  pull_request:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npx --yes github:yangyangnovelist-hub/prompt-cosplay#v0.1.0 audit . --fail-under 55
