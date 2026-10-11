@@ -11,4 +11,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npx --yes github:yangyangnovelist-hub/prompt-cosplay#v0.1.0 audit . --fail-under 55
+      - run: npx --yes github:yangyangnovelist-hub/prompt-cosplay#5359d5042f0d3bee76d5e5f4af000efbd5aceb2d audit . --fail-under 55
