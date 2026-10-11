@@ -1,324 +1,249 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#ef3e25">
-    <meta name="description" content="PromptCosplay is the open-source reality check for AI agent roles and Agent Skills.">
-    <meta property="og:title" content="PromptCosplay — Most AI agents are markdown in a trench coat.">
-    <meta property="og:description" content="Score execution contracts, find unproven personas, merge real-use evidence, and make every agent role earn its tokens.">
+    <meta name="theme-color" content="#050706">
+    <meta name="description" content="PromptCosplay audits AI agent roles and Agent Skills for executable contracts, role-specific proof, and observed use.">
+    <meta property="og:title" content="PromptCosplay — Put every agent role on trial">
+    <meta property="og:description" content="283 agent roles walked in. No role-specific proof was detected. Audit the contract behind the costume.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yangyangnovelist-hub.github.io/prompt-cosplay/">
+    <meta property="og:site_name" content="PromptCosplay">
+    <meta property="og:image" content="https://yangyangnovelist-hub.github.io/prompt-cosplay/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="PromptCosplay evidence field: Most agents are wearing a costume.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://yangyangnovelist-hub.github.io/prompt-cosplay/og-image.jpg">
+    <link rel="canonical" href="https://yangyangnovelist-hub.github.io/prompt-cosplay/">
     <title>PromptCosplay — The agent-role reality check</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%2317130e'/%3E%3Cpath d='M9 10h28c12 0 19 7 19 18S49 46 37 46H25v9H9V10zm16 13v11h10c4 0 6-2 6-6s-2-5-6-5H25z' fill='%23d8ff3f'/%3E%3C/svg%3E">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23050706'/%3E%3Cpath d='M32 8 56 32 32 56 8 32Z' fill='none' stroke='%23c8ff36' stroke-width='4'/%3E%3Cpath d='M32 21 43 32 32 43 21 32Z' fill='%23c8ff36'/%3E%3C/svg%3E">
+    <script>document.documentElement.classList.replace('no-js', 'js-loading');</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <style>
-      :root {
-        --paper: #f4ead5;
-        --ink: #17130e;
-        --red: #ef3e25;
-        --acid: #d8ff3f;
-        --gold: #ffc64b;
-        --muted: #746b5c;
-        --rule: rgba(23, 19, 14, 0.24);
-      }
-
-      * { box-sizing: border-box; }
-      html { scroll-behavior: smooth; }
-      body {
-        margin: 0;
-        color: var(--ink);
-        background: var(--paper);
-        font-family: "IBM Plex Mono", monospace;
-        background-image:
-          linear-gradient(rgba(23, 19, 14, 0.035) 1px, transparent 1px),
-          radial-gradient(circle at 14% 4%, rgba(239, 62, 37, 0.14), transparent 34%),
-          radial-gradient(circle at 87% 20%, rgba(216, 255, 63, 0.2), transparent 28%);
-        background-size: 100% 30px, 100% 100%, 100% 100%;
-      }
-
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        opacity: 0.2;
-        z-index: 10;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
-      }
-
-      a { color: inherit; }
-      button, a { -webkit-tap-highlight-color: transparent; }
-      .shell { width: min(1220px, calc(100% - 42px)); margin: 0 auto; }
-      .ticker {
-        border-bottom: 3px solid var(--ink);
-        display: flex;
-        justify-content: space-between;
-        gap: 18px;
-        padding: 13px 0 11px;
-        font-size: 11px;
-        letter-spacing: 0.13em;
-        text-transform: uppercase;
-      }
-      .ticker strong { color: var(--red); }
-
-      .hero {
-        min-height: 780px;
-        padding: 74px 0 56px;
-        display: grid;
-        grid-template-columns: minmax(0, 1.45fr) minmax(260px, 0.55fr);
-        gap: 62px;
-        align-items: end;
-        border-bottom: 9px solid var(--ink);
-        position: relative;
-      }
-      .eyebrow {
-        display: inline-block;
-        background: var(--ink);
-        color: var(--paper);
-        padding: 8px 11px 7px;
-        font-size: 11px;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        margin-bottom: 28px;
-      }
-      h1, h2, h3 { font-family: "Archivo Black", sans-serif; text-transform: uppercase; }
-      h1 {
-        margin: 0;
-        font-size: clamp(72px, 12.2vw, 166px);
-        line-height: 0.75;
-        letter-spacing: -0.075em;
-      }
-      h1 span { color: var(--red); }
-      .manifesto {
-        border-left: 5px solid var(--red);
-        padding-left: 20px;
-        margin-bottom: 4px;
-      }
-      .manifesto p { font-size: 18px; line-height: 1.55; margin: 0 0 25px; }
-      .manifesto strong { background: var(--acid); padding: 1px 4px; }
-      .small { color: var(--muted); font-size: 12px !important; }
-
-      .command {
-        margin-top: 42px;
-        background: var(--ink);
-        color: #fff9eb;
-        border: 3px solid var(--ink);
-        display: grid;
-        grid-template-columns: 1fr auto;
-        align-items: stretch;
-        box-shadow: 10px 10px 0 var(--red);
-      }
-      .command code { padding: 19px 21px; overflow-x: auto; white-space: nowrap; font-size: 13px; }
-      .command button {
-        border: 0;
-        border-left: 3px solid var(--paper);
-        background: var(--acid);
-        color: var(--ink);
-        padding: 0 20px;
-        font: 600 12px "IBM Plex Mono", monospace;
-        cursor: pointer;
-        text-transform: uppercase;
-      }
-      .command button:hover, .command button:focus-visible { background: var(--gold); }
-
-      .proof-strip {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        border: 3px solid var(--ink);
-        margin: 34px 0 0;
-        gap: 3px;
-        background: var(--ink);
-      }
-      .proof-stat { background: var(--paper); padding: 22px 19px; min-height: 126px; }
-      .proof-stat:nth-child(2) { background: var(--red); color: white; }
-      .proof-stat:nth-child(4) { background: var(--acid); }
-      .proof-stat b { display: block; font: 52px/0.9 "Archivo Black", sans-serif; letter-spacing: -0.05em; }
-      .proof-stat span { display: block; margin-top: 15px; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; }
-
-      .section { padding: 96px 0; border-bottom: 3px solid var(--ink); }
-      .section-head { display: grid; grid-template-columns: 0.55fr 1.45fr; gap: 54px; margin-bottom: 52px; }
-      .section-number { color: var(--red); font-size: 13px; text-transform: uppercase; letter-spacing: 0.16em; }
-      h2 { font-size: clamp(43px, 6.4vw, 88px); line-height: 0.9; letter-spacing: -0.055em; margin: 0; }
-      .section-intro { max-width: 730px; margin: 25px 0 0; font-size: 17px; line-height: 1.65; }
-
-      .layers { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 3px solid var(--ink); border-left: 3px solid var(--ink); }
-      .layer { min-height: 330px; padding: 28px; border-right: 3px solid var(--ink); border-bottom: 3px solid var(--ink); position: relative; }
-      .layer:nth-child(2) { background: var(--gold); }
-      .layer:nth-child(3) { background: var(--acid); }
-      .layer .n { font: 64px/1 "Archivo Black", sans-serif; color: var(--red); }
-      .layer h3 { font-size: 28px; margin: 58px 0 13px; }
-      .layer p { font-size: 13px; line-height: 1.65; margin: 0; }
-
-      .autopsy { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 0; border: 3px solid var(--ink); }
-      .autopsy-copy { padding: 34px; background: var(--ink); color: var(--paper); }
-      .autopsy-copy .source { font-size: 10px; color: var(--acid); letter-spacing: 0.1em; text-transform: uppercase; }
-      .autopsy-copy h3 { font-size: 37px; line-height: 1; margin: 28px 0; }
-      .autopsy-copy p { font-size: 13px; line-height: 1.65; color: #d9cfbd; }
-      .autopsy-copy a { display: inline-block; color: var(--ink); background: var(--acid); text-decoration: none; font-weight: 600; padding: 12px 14px; margin-top: 15px; }
-      .terminal { background: #0d0d0c; color: #f8f0df; padding: 32px; overflow-x: auto; }
-      .terminal pre { margin: 0; font: 13px/1.7 "IBM Plex Mono", monospace; }
-      .terminal .red { color: #ff6c55; }
-      .terminal .acid { color: var(--acid); }
-      .terminal .dim { color: #8e877a; }
-
-      .verdicts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-      .verdict { border: 3px solid var(--ink); padding: 23px; min-height: 225px; background: rgba(244, 234, 213, 0.8); }
-      .verdict b { display: inline-block; border: 2px solid var(--ink); padding: 5px 8px; font-size: 11px; }
-      .verdict:nth-child(1) b { background: var(--acid); }
-      .verdict:nth-child(2) b { background: #fff; }
-      .verdict:nth-child(3) b { background: var(--gold); }
-      .verdict:nth-child(4) b { background: var(--red); color: #fff; }
-      .verdict h3 { margin: 45px 0 12px; font-size: 23px; }
-      .verdict p { margin: 0; font-size: 12px; line-height: 1.6; }
-
-      .cta { padding: 110px 0 120px; text-align: center; }
-      .cta h2 { font-size: clamp(50px, 8vw, 112px); max-width: 1040px; margin: 0 auto; }
-      .cta h2 em { color: var(--red); font-style: normal; }
-      .cta-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 13px; margin-top: 42px; }
-      .button { display: inline-block; border: 3px solid var(--ink); padding: 15px 19px; text-decoration: none; font-weight: 600; font-size: 12px; text-transform: uppercase; background: var(--paper); box-shadow: 5px 5px 0 var(--ink); transition: transform 120ms ease, box-shadow 120ms ease; }
-      .button.primary { background: var(--red); color: white; }
-      .button:hover, .button:focus-visible { transform: translate(3px, 3px); box-shadow: 2px 2px 0 var(--ink); }
-      footer { border-top: 9px solid var(--ink); padding: 25px 0 40px; display: flex; justify-content: space-between; gap: 30px; font-size: 11px; line-height: 1.6; }
-      .hazard { height: 14px; background: repeating-linear-gradient(135deg, var(--ink) 0 12px, var(--acid) 12px 24px); }
-
-      .reveal { animation: rise 620ms both cubic-bezier(.2,.7,.2,1); }
-      .hero .manifesto { animation-delay: 100ms; }
-      .command { animation-delay: 180ms; }
-      @keyframes rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-      @media (max-width: 840px) {
-        .hero, .section-head, .autopsy { grid-template-columns: 1fr; }
-        .hero { min-height: auto; gap: 48px; }
-        .proof-strip, .verdicts { grid-template-columns: 1fr 1fr; }
-        .layers { grid-template-columns: 1fr; }
-        .layer { min-height: 250px; }
-        .layer h3 { margin-top: 30px; }
-      }
-      @media (max-width: 540px) {
-        .shell { width: min(100% - 26px, 1220px); }
-        .ticker span:last-child { display: none; }
-        h1 { font-size: 66px; }
-        .proof-strip, .verdicts { grid-template-columns: 1fr; }
-        .command { grid-template-columns: 1fr; }
-        .command button { border-left: 0; border-top: 3px solid var(--paper); padding: 13px; }
-        .section { padding: 70px 0; }
-        footer { display: block; }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        html { scroll-behavior: auto; }
-        .reveal { animation: none; }
-        .button { transition: none; }
-      }
-    </style>
+    <link rel="stylesheet" href="./site.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@50..150,100..900&amp;family=Fragment+Mono:ital@0;1&amp;display=swap">
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"PromptCosplay","applicationCategory":"DeveloperApplication","operatingSystem":"Any system with Node.js 20 or newer","description":"Open-source auditing for AI agent roles and Agent Skills: execution contracts, role-specific proof, and observed use.","url":"https://yangyangnovelist-hub.github.io/prompt-cosplay/","downloadUrl":"https://github.com/yangyangnovelist-hub/prompt-cosplay","license":"https://opensource.org/license/mit","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
   </head>
   <body>
-    <div class="hazard" aria-hidden="true"></div>
-    <header class="shell ticker">
-      <span><strong>Open source</strong> · agent-role evidence lab</span>
-      <span>contract ≠ proof ≠ use</span>
+    <a class="skip-link" href="#main">Skip to the evidence</a>
+
+    <canvas id="evidence-field" class="field-canvas" aria-hidden="true"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="scanlines" aria-hidden="true"></div>
+
+    <div class="loader" aria-hidden="true">
+      <div class="loader-main">
+        <p class="loader-label">Loading<br><em>evidence</em><br>field</p>
+        <output id="loader-count" class="loader-count">000</output>
+      </div>
+      <div class="loader-rail"><span id="loader-progress" class="loader-progress"></span></div>
+    </div>
+
+    <div id="cursor" class="cursor" aria-hidden="true">
+      <span class="cursor-line-x"></span>
+      <span class="cursor-line-y"></span>
+      <span id="cursor-label" class="cursor-label">SCAN</span>
+    </div>
+
+    <header class="site-nav" aria-label="Primary navigation">
+      <a class="wordmark" href="#top" data-cursor="HOME">
+        <span class="wordmark-mark" aria-hidden="true"></span>
+        <span>Prompt / Cosplay</span>
+      </a>
+      <nav class="nav-links" aria-label="Page sections">
+        <a href="#autopsy" data-cursor="OPEN">Autopsy</a>
+        <a href="#method" data-cursor="READ">Method</a>
+        <a href="https://github.com/yangyangnovelist-hub/prompt-cosplay" data-cursor="STAR">GitHub</a>
+      </nav>
+      <div class="system-status">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Visualizer online</span>
+      </div>
     </header>
 
-    <main class="shell">
-      <section class="hero">
+    <main id="main">
+      <section id="top" class="hero section-shell" aria-labelledby="hero-title">
         <div>
-          <span class="eyebrow reveal">The agent-role reality check</span>
-          <h1 class="reveal">Prompt<br><span>Cosplay</span></h1>
-          <div class="command reveal">
-            <code id="install">npx --yes github:yangyangnovelist-hub/prompt-cosplay audit github:owner/repo</code>
-            <button type="button" id="copy" aria-label="Copy audit command">Copy</button>
+          <p class="hero-topline reveal" style="--delay: 80ms">Open-source agent reality check / v0.1</p>
+          <h1 id="hero-title" class="hero-title" aria-label="Most agents are wearing a costume">
+            <span class="line reveal" style="--delay: 130ms">Most agents</span>
+            <span class="line reveal" style="--delay: 190ms">are wearing</span>
+            <span class="line reveal" style="--delay: 250ms">a costume.</span>
+          </h1>
+
+          <div class="hero-deck reveal" style="--delay: 320ms">
+            <div>
+              <p class="hero-lede">Agent catalogs sell confidence by the kilobyte. PromptCosplay asks the rude question: <strong>what can this role actually do—and where is the proof?</strong></p>
+              <div class="hero-fineprint">
+                <span>Scores the execution contract</span>
+                <span>Separates specification from proof</span>
+              </div>
+            </div>
+
+            <div class="telemetry" aria-label="Live visualization telemetry">
+              <div class="telemetry-row"><span>Objects in field</span><output>283</output></div>
+              <div class="telemetry-row"><span>Field state</span><output id="field-mode">UNRESOLVED</output></div>
+              <div class="telemetry-row"><span>Renderer</span><output id="frame-rate">CANVAS 2D</output></div>
+              <div class="telemetry-row"><span>Proof detected</span><output>0 / 283</output></div>
+            </div>
+          </div>
+
+          <div class="command-dock reveal" style="--delay: 390ms">
+            <span class="command-prompt" aria-hidden="true">$</span>
+            <code id="install-command">npx --yes github:yangyangnovelist-hub/prompt-cosplay audit github:msitarzewski/agency-agents</code>
+            <button id="copy-command" class="copy-command" type="button" data-cursor="COPY" aria-label="Copy install command" aria-live="polite">Copy command</button>
           </div>
         </div>
-        <div class="manifesto reveal">
-          <p>Most AI agents are <strong>markdown in a trench coat.</strong></p>
-          <p>PromptCosplay separates a polished persona from an execution contract—and an execution contract from proof.</p>
-          <p class="small">Local-first. Deterministic. No model required. No source files deleted.</p>
+
+        <div class="hero-bottom reveal" style="--delay: 450ms">
+          <span class="scan-hint"><i class="scan-icon" aria-hidden="true"></i>Move to interrogate the field</span>
+          <span class="scroll-code">Scroll / descend into evidence</span>
         </div>
       </section>
 
-      <section class="proof-strip" aria-label="agency-agents sample audit">
-        <div class="proof-stat"><b>283</b><span>role-shaped files scanned</span></div>
-        <div class="proof-stat"><b>0</b><span>role-specific proofs detected</span></div>
-        <div class="proof-stat"><b>62</b><span>average contract score</span></div>
-        <div class="proof-stat"><b>1M</b><span>aggregate catalog tokens</span></div>
-      </section>
+      <div class="signal-strip" aria-hidden="true">
+        <div class="signal-track">
+          <span>Persona is not proof <i>◆</i> A prompt is not a product <i>◆</i> Make the role earn its tokens <i>◆</i> Persona is not proof <i>◆</i> A prompt is not a product <i>◆</i> Make the role earn its tokens <i>◆</i></span>
+          <span>Persona is not proof <i>◆</i> A prompt is not a product <i>◆</i> Make the role earn its tokens <i>◆</i> Persona is not proof <i>◆</i> A prompt is not a product <i>◆</i> Make the role earn its tokens <i>◆</i></span>
+        </div>
+      </div>
 
-      <section class="section" id="method">
-        <div class="section-head">
-          <span class="section-number">01 / The distinction</span>
-          <div><h2>A good costume is not a shipping record.</h2><p class="section-intro">The ecosystem keeps counting personas. PromptCosplay counts evidence. It refuses to turn a long prompt, a passing lint check, and a successful task into the same claim.</p></div>
-        </div>
-        <div class="layers">
-          <article class="layer"><span class="n">01</span><h3>Contract</h3><p>Concrete workflow, deliverables, tools, boundaries, failure handling, and acceptance gates. A role can be excellent here and still be unproven.</p></article>
-          <article class="layer"><span class="n">02</span><h3>Proof</h3><p>Role-specific evals, tests, or benchmarks. Generic repository CI does not prove every specialist hiding in the catalog.</p></article>
-          <article class="layer"><span class="n">03</span><h3>Use</h3><p>Observed invocations and errors imported from SkillReaper. What fired in real work outranks what merely looked impressive on paper.</p></article>
-        </div>
-      </section>
-
-      <section class="section" id="autopsy">
-        <div class="section-head">
-          <span class="section-number">02 / Public autopsy</span>
-          <div><h2>Put the biggest promise under the brightest light.</h2><p class="section-intro">The first pinned sample audits one of GitHub’s largest agent-role catalogs. The result is not “bad prompts.” It is more useful: strong specifications, almost no role-level proof.</p></div>
-        </div>
-        <div class="autopsy">
-          <div class="autopsy-copy">
-            <span class="source">msitarzewski/agency-agents @ f99f6aa</span>
-            <h3>0 of 283 roles reached SHIP.</h3>
-            <p>253 had enough operational detail to deserve PROVE. 30 fell below the contract threshold. None had a detected role-specific eval or observed-use record in the audit.</p>
-            <a href="agency-agents-audit.html">Open the visual report →</a>
+      <section id="method" class="chapter" aria-labelledby="method-title">
+        <div class="section-shell">
+          <div class="chapter-head">
+            <p class="section-index reveal">01 / The distinction</p>
+            <div>
+              <h2 id="method-title" class="chapter-title reveal">Stop grading the <span class="outline">costume.</span></h2>
+              <p class="chapter-intro reveal">A role can sound senior, list every fashionable tool, and still be an untested hypothesis. PromptCosplay keeps three kinds of evidence separate so prose cannot borrow credibility from proof it never earned.</p>
+            </div>
           </div>
-          <div class="terminal" aria-label="PromptCosplay sample output"><pre><span class="acid">PROMPT / COSPLAY</span>
-Most AI agents are markdown in a trench coat.
 
-283 roles · <span class="red">0 SHIP</span> · 253 PROVE · 30 BURY
-HYPE 18/100 · EVIDENCE 62/100
-~1,010,348 aggregate catalog tokens
-<span class="red">PROOF 0/283</span> roles have observed use
-or role-specific evals
-
-<span class="dim">The prompts are not the punchline.
-The missing evidence is.</span></pre></div>
+          <div class="distinction-grid">
+            <article class="distinction-row reveal" data-cursor="CONTRACT">
+              <span class="distinction-number">01 / 03</span>
+              <h3>Contract</h3>
+              <p>Does the role define concrete steps, outputs, tools, boundaries, failure handling, and acceptance gates? Good instructions matter. They are still only the specification.</p>
+            </article>
+            <article class="distinction-row reveal" data-cursor="PROOF">
+              <span class="distinction-number">02 / 03</span>
+              <h3>Proof</h3>
+              <p>Is there a role-specific eval, benchmark, or test? A generic repository CI badge does not prove that every persona can perform its advertised job.</p>
+            </article>
+            <article class="distinction-row reveal" data-cursor="USE">
+              <span class="distinction-number">03 / 03</span>
+              <h3>Use</h3>
+              <p>Did the role fire in a real session, and did it finish without error? PromptCosplay can merge observed-use evidence instead of inventing another transcript parser.</p>
+            </article>
+          </div>
         </div>
       </section>
 
-      <section class="section" id="verdicts">
-        <div class="section-head">
-          <span class="section-number">03 / Verdicts</span>
-          <div><h2>Every role leaves with a decision.</h2><p class="section-intro">No vague “quality score” graveyard. Each label points to the next rational action.</p></div>
-        </div>
-        <div class="verdicts">
-          <article class="verdict"><b>SHIP</b><h3>Keep the claim.</h3><p>Strong contract plus a matching eval or successful observed real-world use, with no skill errors.</p></article>
-          <article class="verdict"><b>PROVE</b><h3>Run the fight.</h3><p>The role may be good. Make it beat a direct baseline before promoting it.</p></article>
-          <article class="verdict"><b>MERGE</b><h3>End the casting call.</h3><p>High overlap with a stronger role. Consolidate instead of multiplying personas.</p></article>
-          <article class="verdict"><b>BURY</b><h3>Lose the costume.</h3><p>Too little operational substance to justify its prompt and routing surface.</p></article>
+      <section id="autopsy" class="lab" aria-labelledby="autopsy-title">
+        <div class="section-shell lab-layout">
+          <div class="lab-copy">
+            <p class="lab-kicker reveal">02 / Public autopsy</p>
+            <h2 id="autopsy-title" class="reveal">283 entered.<br><em>No proof detected.</em></h2>
+            <p class="reveal">Replay the pinned audit of <strong>agency-agents@f99f6aa</strong>. The catalog is not dismissed as “bad prompts”: its average execution contract scored 62/100. No role-specific eval was detected, and no observed-use evidence file was supplied.</p>
+            <div class="lab-actions reveal">
+              <button id="run-sample" class="lab-button" type="button" data-cursor="MAP">Visualize verdicts</button>
+              <button id="reset-sample" class="lab-reset" type="button" data-cursor="RESET">Reset field</button>
+            </div>
+            <p id="lab-status" class="lab-status" role="status" aria-live="polite">Pinned result ready / 283 unresolved</p>
+          </div>
+
+          <div class="lab-machine reveal" aria-label="Pinned audit result">
+            <div class="machine-bar">
+              <span>evidence-collider / sample-001</span>
+              <span class="machine-lights" aria-hidden="true"><i></i><i></i><i></i></span>
+            </div>
+            <div class="machine-screen">
+              <div class="machine-id">SOURCE // github:msitarzewski/agency-agents@f99f6aa</div>
+              <div class="machine-result" aria-label="Verdict counts">
+                <div class="result-cell" data-verdict="ship"><b data-target="0">0</b><span>Ship / proven</span></div>
+                <div class="result-cell" data-verdict="prove"><b data-target="253">253</b><span>Prove / claim</span></div>
+                <div class="result-cell" data-verdict="merge"><b data-target="0">0</b><span>Merge / overlap</span></div>
+                <div class="result-cell" data-verdict="bury"><b data-target="30">30</b><span>Bury / thin</span></div>
+              </div>
+              <pre class="terminal-log" aria-label="Audit summary"><span class="terminal-line">$ cosplay audit github:msitarzewski/agency-agents</span><span class="terminal-line">[scan] 283 role-shaped files detected</span><span class="terminal-line">[contract] average operational score: 62 / 100</span><span class="terminal-line is-proof">[proof] 0 role-specific evals detected</span><span class="terminal-line">[usage] no observed-use evidence file supplied</span><span class="terminal-line is-alert">[verdict] 0 SHIP · 253 PROVE · 0 MERGE · 30 BURY</span><span class="terminal-line">[note] missing proof ≠ impossible capability</span></pre>
+            </div>
+            <div class="machine-footer">
+              <span>Deterministic document heuristics / no model vibes</span>
+              <a href="./agency-agents-audit.html" data-cursor="REPORT">Inspect the report ↗</a>
+            </div>
+          </div>
         </div>
       </section>
 
-      <section class="cta">
-        <h2>Make every agent <em>earn</em> its tokens.</h2>
-        <div class="cta-links">
-          <a class="button primary" href="https://github.com/yangyangnovelist-hub/prompt-cosplay">Star on GitHub</a>
-          <a class="button" href="https://github.com/yangyangnovelist-hub/prompt-cosplay#use-it">Run the audit</a>
-          <a class="button" href="agency-agents-audit.html">See the evidence</a>
+      <section id="verdicts" class="chapter verdict-chapter" aria-labelledby="verdicts-title">
+        <div class="section-shell">
+          <div class="chapter-head">
+            <p class="section-index reveal">03 / The verdicts</p>
+            <div>
+              <h2 id="verdicts-title" class="chapter-title reveal">Four exits.<br><span class="outline">No vibes.</span></h2>
+              <p class="chapter-intro reveal">Hover a verdict to retune the evidence field. Each label makes a different claim—and every claim is deliberately narrow.</p>
+            </div>
+          </div>
+
+          <div class="verdict-stack">
+            <a class="verdict-row reveal" data-verdict="ship" data-cursor="SHIP" href="./agency-agents-audit.html">
+              <span class="verdict-count">01 / 04</span>
+              <strong class="verdict-name">Ship</strong>
+              <p>Strong execution contract plus role-specific proof or successful observed use, with no blocking skill errors.</p>
+              <span class="verdict-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="verdict-row reveal" data-verdict="prove" data-cursor="PROVE" href="./agency-agents-audit.html">
+              <span class="verdict-count">02 / 04</span>
+              <strong class="verdict-name">Prove</strong>
+              <p>Potentially useful and operationally specified, but the advertised capability is still a claim.</p>
+              <span class="verdict-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="verdict-row reveal" data-verdict="merge" data-cursor="MERGE" href="./agency-agents-audit.html">
+              <span class="verdict-count">03 / 04</span>
+              <strong class="verdict-name">Merge</strong>
+              <p>Substantial lexical overlap with a stronger role. Consolidate the prompt surface; preserve the useful parts.</p>
+              <span class="verdict-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="verdict-row reveal" data-verdict="bury" data-cursor="BURY" href="./agency-agents-audit.html">
+              <span class="verdict-count">04 / 04</span>
+              <strong class="verdict-name">Bury</strong>
+              <p>Too little operational substance to justify the prompt surface. PromptCosplay reports it; it never deletes it.</p>
+              <span class="verdict-arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="integrity" aria-labelledby="integrity-title">
+        <div class="section-shell integrity-grid">
+          <h2 id="integrity-title" class="reveal">The audit<br><span>audits itself.</span></h2>
+          <div class="integrity-copy reveal">
+            <p><strong>No fake omniscience.</strong> Static contract scores measure whether instructions are operational—not whether a model follows them. Missing proof means “not detected,” not “can never work.”</p>
+            <p>PromptCosplay reuses SkillDoctor for conformance and security, SkillReaper for observed use, and promptfoo for behavioral A/B execution.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta" aria-labelledby="cta-title">
+        <div class="cta-content section-shell">
+          <p class="eyebrow reveal">Open source / MIT / Node 20+</p>
+          <h2 id="cta-title" class="reveal">Put your agent<br><em>on trial.</em></h2>
+          <div class="cta-actions reveal">
+            <a class="cta-button primary magnetic" href="https://github.com/yangyangnovelist-hub/prompt-cosplay" data-cursor="STAR">Star on GitHub</a>
+            <a class="cta-button magnetic" href="./agency-agents-audit.html" data-cursor="REPORT">Open the autopsy</a>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="shell">
-      <span>PromptCosplay · MIT · local-first</span>
-      <span>Built on SkillDoctor · SkillReaper · promptfoo</span>
+    <footer class="site-footer">
+      <span>PromptCosplay / agent-role reality check</span>
+      <span>Contract ≠ proof ≠ use</span>
+      <span>MIT / 2026</span>
     </footer>
 
-    <script>
-      const button = document.querySelector("#copy");
-      const command = document.querySelector("#install");
-      button?.addEventListener("click", async () => {
-        await navigator.clipboard.writeText(command?.textContent ?? "");
-        button.textContent = "Copied";
-        setTimeout(() => { button.textContent = "Copy"; }, 1400);
-      });
-    </script>
+    <script type="module" src="./site.js"></script>
   </body>
 </html>
